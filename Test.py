@@ -57,14 +57,9 @@ class CustomGridEnv(gym.Env):
         self.grid[3, 4] = 4  # ziel (goal)
     
     def _setup_walls(self):
-
-
-
         
         self.walls_horizontal = np.zeros((self.rows, self.cols), dtype=bool)
         self.walls_vertical = np.zeros((self.rows, self.cols), dtype=bool)
-        
-
 
         self.walls_horizontal[0, 3] = True
         self.walls_horizontal[1, 2] = True
@@ -90,7 +85,6 @@ class CustomGridEnv(gym.Env):
         """Helper function to move an entity (agent or ghost) with wall checking"""
         row, col = current_pos
         new_row, new_col = row, col
-        
 
         if action == 0:
             new_col = col - 1
@@ -114,10 +108,10 @@ class CustomGridEnv(gym.Env):
                 if col > 0 and self.walls_vertical[new_row, new_col]:
                     move_valid = False
             elif action == 1:
-                if row < self.rows and self.walls_horizontal[new_row, new_col - 1]:
+                if row < self.rows and self.walls_horizontal[new_row - 1, new_col]:
                     move_valid = False
             elif action == 2:
-                if col < self.cols and self.walls_vertical[new_row - 1, new_col]:
+                if col < self.cols and self.walls_vertical[new_row, new_col - 1]:
                     move_valid = False
             elif action == 3:
                 if row > 0 and self.walls_horizontal[new_row, new_col]:
@@ -315,8 +309,8 @@ if __name__ == "__main__":
     env.render()
     
     # Simulate a few moves to show the ghost chasing the agent
-    actions = [2, 2, 3, 3, 0]  # right, right, up, up, left
-    action_names = ["right", "right", "up", "up", "left"]
+    actions = [3, 2, 1, 0]
+    action_names = ["up", "right", "down", "left"]
     
     for i, (action, action_name) in enumerate(zip(actions, action_names)):
         print(f"\n\nMove {i+1}: Agent moves {action_name}")
