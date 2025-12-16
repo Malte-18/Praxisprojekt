@@ -14,47 +14,39 @@ class CustomGridEnv(gym.Env):
         })
         self.action_space = gym.spaces.Discrete(4)  # 0: left, 1: down, 2: right, 3: up
 
-        # 0: empty, 1: obstacle, 2: start, 3: goal, 4+: special
         self.grid = np.zeros((self.rows, self.cols), dtype=int)
         self._setup_grid()
         self._setup_walls()
         self.agent_pos = [3, 0]
         self.start_pos = [3, 0]
-        self.ghost_pos = [1, 2]  # Ghost starts at position (1, 2)
-        self.ghost_start_pos = [1, 2]
+        self.ghost_pos = [0, 3]
+        self.ghost_start_pos = [0, 3]
         self.step_count = 0
 
     def _setup_grid(self):
-        # Fill in grid based on the image (4x5 grid)
-        # Row 0: dog, red obstacle, start, empty, dog with music
-        # Row 1: empty, green obstacle, ghost, flower, green obstacle
-        # Row 2: red obstacle, green obstacle, music note, red obstacle, empty
-        # Row 3: robot on red obstacle, ziel, green obstacle with music, flowers, ziel
+        self.grid[0, 0] = 'Dog', 'Green'
+        self.grid[0, 1] = 'Red'
+        self.grid[0, 2] = 'Start'
+        self.grid[0, 3] = ''
+        self.grid[0, 4] = 'Dog', 'One Note'
         
-        # 0: empty, 1: red obstacle, 2: green obstacle, 3: start, 4: goal, 5+: special items
-        self.grid[0, 0] = 5  # dog
-        self.grid[0, 1] = 1  # red obstacle
-        self.grid[0, 2] = 3  # start
-        self.grid[0, 3] = 0  # empty
-        self.grid[0, 4] = 5  # dog with music
+        self.grid[1, 0] = ''
+        self.grid[1, 1] = 'Green'
+        self.grid[1, 2] = ''
+        self.grid[1, 3] = 'Flower'
+        self.grid[1, 4] = 'Green'
         
-        self.grid[1, 0] = 0  # empty
-        self.grid[1, 1] = 2  # green obstacle
-        self.grid[1, 2] = 0  # ghost (agent starts here)
-        self.grid[1, 3] = 5  # flower
-        self.grid[1, 4] = 2  # green obstacle
+        self.grid[2, 0] = 'Red'
+        self.grid[2, 1] = 'Green'
+        self.grid[2, 2] = 'One Note'
+        self.grid[2, 3] = 'Red'
+        self.grid[2, 4] = ''
         
-        self.grid[2, 0] = 1  # red obstacle
-        self.grid[2, 1] = 2  # green obstacle
-        self.grid[2, 2] = 5  # music note
-        self.grid[2, 3] = 1  # red obstacle
-        self.grid[2, 4] = 0  # empty
-        
-        self.grid[3, 0] = 1  # robot on red obstacle
-        self.grid[3, 1] = 4  # ziel (goal)
-        self.grid[3, 2] = 2  # green obstacle with music
-        self.grid[3, 3] = 5  # flowers
-        self.grid[3, 4] = 4  # ziel (goal)
+        self.grid[3, 0] = 'Red'
+        self.grid[3, 1] = 'Goal'
+        self.grid[3, 2] = 'Green', 'Two Notes'
+        self.grid[3, 3] = 'Flower'
+        self.grid[3, 4] = 'Goal'
     
     def _setup_walls(self):
         
