@@ -366,7 +366,11 @@ class CustomGridEnv(gym.Env):
             
             # Check if agent reached goal (only check on agent's turn)
             current_cell = self.grid[self.agent_pos[0], self.agent_pos[1]]
-            if current_cell['is_goal']:
+            if self.agent_pos == self.ghost_pos:
+                reward = self.get_reward_structure()["caught_by_ghost"]
+                terminated = True
+                info['caught_by_ghost'] = True
+            elif current_cell['is_goal']:
                 reward = self.get_reward_structure()["reached_goal"]
                 terminated = True
                 info['reached_goal'] = True
@@ -724,7 +728,7 @@ class CustomGridEnv(gym.Env):
         
         # Current cell info
         current_cell = self.grid[self.agent_pos[0], self.agent_pos[1]]
-        colour_name = 'None'
+        colour_name = 'None' if current_cell['colour'] == 0 else 'Red' if current_cell['colour'] == 1 else 'Green'
         cell_text = self.small_font.render(f"Cell colour: {colour_name}", True, self.colors['white'])
         self.screen.blit(cell_text, (200, panel_y + 45))
         
