@@ -4,22 +4,7 @@
 
 The environment is a **4x5 grid** (4 rows, 5 columns) with the following coordinate system:
 
-```
-     Col 0    Col 1    Col 2    Col 3    Col 4
-     ┌────────┬────────┬────────┬────────┬────────┐
-Row 0│ Green  │  Red   │ Start  │        │ Dog    │
-     │ Dog    │        │        │ Ghost  │ Note   │
-     ├────────┼────────┼────────┼────────┼────────┤
-Row 1│        │ Green  │        │ Flower │ Green  │
-     │        │        │        │        │        │
-     ├────────┼────────┼────────┼────────┼────────┤
-Row 2│  Red   │ Green  │  Note  │  Red   │        │
-     │ Agent  │        │        │        │        │
-     ├────────┼────────┼────────┼────────┼────────┤
-Row 3│  Red   │ GOAL   │ Green  │ Flower │ GOAL   │
-     │        │        │ Notes  │        │        │
-     └────────┴────────┴────────┴────────┴────────┘
-```
+![](Umgebung.png)
 
 **Starting Positions:**
 - Agent starts at position `[2, 0]` (row 2, column 0)

@@ -13,12 +13,12 @@ Each call to `interface.step(action)` processes both turns and returns the resul
 
 Both the agent and ghost use the same action space:
 
-| Action | Direction | Effect |
-|--------|-----------|--------|
-| 0 | Left | Move to column - 1 |
-| 1 | Down | Move to row + 1 |
-| 2 | Right | Move to column + 1 |
-| 3 | Up | Move to row - 1 |
+| Action | Direction | Effect             |
+|--------|-----------|--------------------|
+| 0      | Left      | Move to column - 1 |
+| 1      | Down      | Move to row + 1    |
+| 2      | Right     | Move to column + 1 |
+| 3      | Up        | Move to row - 1    |
 
 **Note**: Row 0 is at the top, so "Down" increases the row number.
 
@@ -106,10 +106,10 @@ The ghost catches the agent when both occupy the same cell after the ghost's mov
 └──────┬──────┘                                  │
        │                                         │
        ▼                                         │
-┌─────────────┐         ┌──────────────┐        │
-│ Check Goal  │───Yes──▶│  Episode End │        │
+┌─────────────┐         ┌───────────────┐        │
+│ Check Goal  │───Yes──▶│  Episode End  │        │
 └──────┬──────┘         │  (reward +100)│        │
-       │ No             └──────────────┘        │
+       │ No             └───────────────┘        │
        ▼                                         │
 ┌─────────────┐                                  │
 │ Ghost Turn  │                                  │
@@ -117,10 +117,10 @@ The ghost catches the agent when both occupy the same cell after the ghost's mov
 └──────┬──────┘                                  │
        │                                         │
        ▼                                         │
-┌─────────────┐         ┌──────────────┐        │
-│ Check Catch │───Yes──▶│  Episode End │        │
+┌─────────────┐         ┌───────────────┐        │
+│ Check Catch │───Yes──▶│  Episode End  │        │
 └──────┬──────┘         │  (reward -50) │        │
-       │ No             └──────────────┘        │
+       │ No             └───────────────┘        │
        │                                         │
        └─────────────────────────────────────────┘
 ```

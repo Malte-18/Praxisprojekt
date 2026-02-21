@@ -2,6 +2,8 @@
 
 A Gymnasium-based grid environment featuring an agent navigating a 4x5 grid to reach goal cells while avoiding a chasing ghost.
 
+![Demo Video](Aufzeichnung_Umgebung.mp4)
+
 ## Overview
 
 CustomGrid is a turn-based environment where:
@@ -14,7 +16,7 @@ CustomGrid is a turn-based environment where:
 ## Quick Start
 
 ```python
-from Enviroment import AgentInterface, RandomAgent
+from src.Environment import AgentInterface, RandomAgent
 
 # Create the interface
 interface = AgentInterface(render=True, slip_probability=0.2)
@@ -39,13 +41,13 @@ interface.close()
 
 ## Documentation Index
 
-| Document | Description |
-|----------|-------------|
-| [Environment](environment.md) | Grid layout, cells, colours, and items |
-| [Gameplay](gameplay.md) | Turn system, movement, ghost behavior, and slip mechanics |
-| [Observations](observations.md) | Observation space structure and contents |
-| [Rewards](rewards.md) | Reward structure and terminal states |
-| [API Reference](api.md) | Complete API documentation |
+| Document                        | Description                                               |
+|---------------------------------|-----------------------------------------------------------|
+| [Environment](environment.md)   | Grid layout, cells, colours, and items                    |
+| [Gameplay](gameplay.md)         | Turn system, movement, ghost behavior, and slip mechanics |
+| [Observations](observations.md) | Observation space structure and contents                  |
+| [Rewards](rewards.md)           | Reward structure and terminal states                      |
+| [API Reference](api.md)         | Complete API documentation                                |
 
 ## Requirements
 
