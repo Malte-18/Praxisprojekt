@@ -159,7 +159,7 @@ env = gym.make("CustomGrid-v0")
 For advanced use cases requiring direct environment access:
 
 ```python
-from Enviroment import CustomGridEnv
+from src.Environment import CustomGridEnv
 
 env = CustomGridEnv(render_mode="human", slip_probability=0.2)
 obs, info = env.reset()
@@ -207,7 +207,7 @@ class MyAgent:
 Chooses random actions.
 
 ```python
-from Enviroment import RandomAgent
+from src.Environment import RandomAgent
 
 agent = RandomAgent(interface.get_action_space())
 action = agent.get_action(obs)
@@ -218,7 +218,7 @@ action = agent.get_action(obs)
 Ghost agent that chases the player (default ghost behavior).
 
 ```python
-from Enviroment import ChaseGhostAgent
+from src.Environment import ChaseGhostAgent
 
 ghost = ChaseGhostAgent(env.action_space)
 ghost_action = ghost.get_action(ghost_obs)
@@ -229,7 +229,7 @@ ghost_action = ghost.get_action(ghost_obs)
 Ghost agent that moves randomly.
 
 ```python
-from Enviroment import RandomGhostAgent
+from src.Environment import RandomGhostAgent
 
 interface = AgentInterface(ghost_agent_class=RandomGhostAgent)
 ```
@@ -243,7 +243,7 @@ interface = AgentInterface(ghost_agent_class=RandomGhostAgent)
 Run multiple episodes with specified agents.
 
 ```python
-from Enviroment import run_with_agent, RandomAgent
+from src.Environment import run_with_agent, RandomAgent
 
 stats = run_with_agent(
     agent_class=None,           # Your agent class (None = RandomAgent)
@@ -262,7 +262,8 @@ stats = run_with_agent(
 ## Complete Example
 
 ```python
-from Enviroment import AgentInterface
+from src.Environment import AgentInterface
+
 
 class SmartAgent:
     """Agent that avoids ghost and finds goal."""

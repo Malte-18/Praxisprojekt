@@ -52,12 +52,13 @@ class CustomGridEnv(gym.Env):
         self.ghost_start_pos = [0, 3]
         self.step_count = 0
         self.current_turn = 0  # 0 = agent's turn, 1 = ghost's turn
-        
+        self.info = {}
+
         # Pygame setup
         self.cell_size = 100
         self.wall_thickness = 6
         self.window_width = self.cols * self.cell_size
-        self.window_height = self.rows * self.cell_size + 120  # Extra space for info panel
+        self.window_height = self.rows * self.cell_size + 145  # Extra space for info panel
         self.screen = None
         self.clock = None
         self.font = None
@@ -133,6 +134,7 @@ class CustomGridEnv(gym.Env):
         self.ghost_pos = list(self.ghost_start_pos)
         self.step_count = 0
         self.current_turn = 0  # Agent moves first
+        self.info = {}
         return self._get_obs(), {"current_turn": "agent"}
 
     def _move_entity(self, current_pos, action):
@@ -363,7 +365,11 @@ class CustomGridEnv(gym.Env):
                 info['slipped'] = True
                 info['intended_action'] = action_names[action]
                 info['actual_action'] = action_names[actual_action]
-            
+            else:
+                info['slipped'] = False
+                info['intended_action'] = action_names[action]
+                info['actual_action'] = action_names[actual_action]
+
             # Check if agent reached goal (only check on agent's turn)
             current_cell = self.grid[self.agent_pos[0], self.agent_pos[1]]
             if self.agent_pos == self.ghost_pos:
@@ -383,7 +389,8 @@ class CustomGridEnv(gym.Env):
             self.current_turn = 1
             info['current_turn'] = 'ghost'
             info['mover'] = 'agent'
-            
+            self.info = info
+
         else:
             # Ghost's turn
             self.move_ghost(action)
@@ -739,7 +746,13 @@ class CustomGridEnv(gym.Env):
         goal_text = self.small_font.render(f"Goal: {'Yes' if current_cell['is_goal'] else 'No'}", True, 
                                           self.colors['yellow'] if current_cell['is_goal'] else self.colors['white'])
         self.screen.blit(goal_text, (200, panel_y + 95))
-    
+
+        intended_action = self.small_font.render(f"Intended Action: {self.info['intended_action'] if 'intended_action' in self.info else ''}", True, self.colors['white'])
+        self.screen.blit(intended_action, (10, panel_y + 120))
+
+        actual_action = self.small_font.render(f"Actual Action: {self.info['actual_action'] if 'actual_action' in self.info else ''}", True, self.colors['white'])
+        self.screen.blit(actual_action, (200, panel_y + 120))
+
     def render(self):
         """Render the environment using Pygame"""
         self._init_pygame()
@@ -802,7 +815,7 @@ class CustomGridEnv(gym.Env):
 
 gym.envs.registration.register(
     id="CustomGrid-v0",
-    entry_point="Test:CustomGridEnv",
+    entry_point="Environment:CustomGridEnv",
 )
 
 
