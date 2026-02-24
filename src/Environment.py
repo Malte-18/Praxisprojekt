@@ -708,7 +708,7 @@ class CustomGridEnv(gym.Env):
     def _draw_info_panel(self):
         """Draw the information panel at the bottom"""
         panel_y = self.rows * self.cell_size
-        pygame.draw.rect(self.screen, self.colors['dark_gray'], (0, panel_y, self.window_width, 120))
+        pygame.draw.rect(self.screen, self.colors['dark_gray'], (0, panel_y, self.window_width, 145))
         
         # Step counter
         step_text = self.font.render(f"Step: {self.step_count}", True, self.colors['white'])
